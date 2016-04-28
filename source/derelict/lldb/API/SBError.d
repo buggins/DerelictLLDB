@@ -13,6 +13,38 @@ module derelict.lldb.API.SBError;
 
 import derelict.lldb.API.SBDefines;
 
+struct SBError {
+    import derelict.lldb.functions;
+
+    this(ref SBError rhs) {
+        SBError_ctr_SBError(this, rhs);
+    }
+
+    ~this() {
+        SBError_dtr(this);
+    }
+
+    void Clear () {
+        SBError_Clear(this);
+    }
+
+    bool Fail () const {
+        return SBError_Fail(this);
+    }
+
+    bool Success () const {
+        return SBError_Success(this);
+    }
+
+private:
+
+    //std::unique_ptr<lldb_private::Error> m_opaque_ap;
+    // init value is null -- acts as a replacement of std::unique_ptr<lldb_private::Error> constructor
+    void * m_opaque_ap;
+}
+
+/+
+
 extern (C++, lldb) {
 
 class SBError {
@@ -106,3 +138,4 @@ private:
 
 } // namespace lldb
 
++/

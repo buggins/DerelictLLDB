@@ -5,7 +5,10 @@ public import derelict.lldb.types;
 
 
 extern( C ) @nogc nothrow {
+    import derelict.lldb.API.SBError;
+    import derelict.lldb.API.SBTarget;
 
+    // SBDebugger
     // ?Create@SBDebugger@lldb@@SA?AV12@XZ
     // ?Create@SBDebugger@lldb@@SA?AV12@_NP6AXPBDPAX@Z2@Z
 
@@ -22,26 +25,47 @@ extern( C ) @nogc nothrow {
     //    Terminate();
     alias da_SBDebugger_Terminate = void function();
 
+    //lldb::SBTarget
+    //CreateTarget (const char *filename,
+    //              const char *target_triple,
+    //              const char *platform_name,
+    //              bool add_dependent_modules,
+    //              lldb::SBError& error);
+    //?CreateTarget@SBDebugger@lldb@@QAE?AVSBTarget@2@PBD00_NAAVSBError@2@@Z
+    alias da_SBDebugger_CreateTarget_long = SBTarget_impl function (SBDebugger_impl _this, const char *filename,
+                                                               const char *target_triple,
+                                                               const char *platform_name,
+                                                               bool add_dependent_modules,
+                                                               ref SBError error);
 
-    //alias da_FC_FcObjectSetBuild = FcObjectSet * function(const char *first, ...);
-    //
-    //alias da_FC_FcPatternCreate = FcPattern * function();
-    //
-    //alias da_FC_FcPatternAddBool = FcBool function(FcPattern *p, const char *object, FcBool b);
-    //
-    //alias da_FC_FcFontList = FcFontSet * function(FcConfig    *config, FcPattern    *p, FcObjectSet *os);
-    //
-    //alias da_FC_FcPatternDestroy = void function(FcPattern *p);
-    //
-    //alias da_FC_FcObjectSetDestroy = void function(FcObjectSet *os);
-    //
-    //alias da_FC_FcPatternGetString = FcResult function(const FcPattern *p, const char *object, int n, FcChar8 ** s);
-    //
-    //alias da_FC_FcPatternGetInteger = FcResult function(const FcPattern *p, const char *object, int n, int *i);
-    //
-    //alias da_FC_FcPatternGetBool = FcResult function(const FcPattern *p, const char *object, int n, FcBool *b);
-    //
-    //alias da_FC_FcFontSetDestroy = void  function(FcFontSet *s);
+    // SBError::SBError(SBError&)
+    // ??0SBError@lldb@@QAE@ABV01@@Z
+    alias da_SBError_ctr_SBError = void function(ref SBError _this, ref const SBError rhs);
+
+    // SBError::SBError()
+    // ??0SBError@lldb@@QAE@XZ
+    alias da_SBError_ctr = void function(ref SBError _this);
+
+    // SBError::~SBError()
+    // ??1SBError@lldb@@QAE@XZ
+    alias da_SBError_dtr = void function(ref SBError _this);
+
+    //void
+    //    Clear ();
+    //?Clear@SBError@lldb@@QAEXXZ
+    alias da_SBError_Clear = void function(ref SBError _this);
+
+    //bool
+    //    Fail () const;
+    //?Fail@SBError@lldb@@QBE_NXZ
+    alias da_SBError_Fail = bool function(ref const SBError _this);
+
+    //bool
+    //    Success () const;
+    //?Success@SBError@lldb@@QBE_NXZ
+    alias da_SBError_Success = bool function(ref const SBError _this);
+
+
 }
 
 __gshared {
@@ -49,46 +73,11 @@ __gshared {
     da_SBDebugger_Create_bool SBDebugger_Create_bool;
     da_SBDebugger_Initialize SBDebugger_Initialize;
     da_SBDebugger_Terminate SBDebugger_Terminate;
-    //da_FC_FcObjectSetBuild FcObjectSetBuild;
-    //
-    //da_FC_FcPatternCreate FcPatternCreate;
-    //
-    //da_FC_FcPatternAddBool FcPatternAddBool;
-    //
-    //da_FC_FcFontList FcFontList;
-    //
-    //da_FC_FcPatternDestroy FcPatternDestroy;
-    //
-    //da_FC_FcObjectSetDestroy FcObjectSetDestroy;
-    //
-    //da_FC_FcPatternGetString FcPatternGetString;
-    //
-    //da_FC_FcPatternGetInteger FcPatternGetInteger;
-    //
-    //da_FC_FcPatternGetBool FcPatternGetBool;
-    //
-    //da_FC_FcFontSetDestroy FcFontSetDestroy;
+    da_SBDebugger_CreateTarget_long SBDebugger_CreateTarget_long;
+    da_SBError_ctr_SBError SBError_ctr_SBError;
+    da_SBError_ctr SBError_ctr;
+    da_SBError_dtr SBError_dtr;
+    da_SBError_Clear SBError_Clear;
+    da_SBError_Fail SBError_Fail;
+    da_SBError_Success SBError_Success;
 }
-
-/+
-extern(C) FcObjectSet * FcObjectSetBuild(const char *first, ...);
-
-extern(C) FcPattern * FcPatternCreate();
-
-extern(C) FcBool FcPatternAddBool(FcPattern *p, const char *object, FcBool b);
-
-extern(C) FcFontSet * FcFontList(FcConfig    *config, FcPattern    *p, FcObjectSet *os);
-
-extern(C) void FcPatternDestroy(FcPattern *p);
-
-extern(C) void FcObjectSetDestroy(FcObjectSet *os);
-
-extern(C) FcResult FcPatternGetString(const FcPattern *p, const char *object, int n, FcChar8 ** s);
-
-extern(C) FcResult FcPatternGetInteger(const FcPattern *p, const char *object, int n, int *i);
-
-extern(C) FcResult FcPatternGetBool (const FcPattern *p, const char *object, int n, FcBool *b);
-
-extern(C) void FcFontSetDestroy (FcFontSet *s);
-
-+/

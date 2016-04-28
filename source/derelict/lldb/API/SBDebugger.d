@@ -1,5 +1,7 @@
 module derelict.lldb.API.SBDebugger;
 
+import derelict.lldb.API.SBTarget;
+import derelict.lldb.API.SBError;
 
 struct SBDebugger {
     import derelict.lldb.functions;
@@ -11,6 +13,30 @@ struct SBDebugger {
     @property bool isNull() {
         return _this is null;
     }
+
+
+    //lldb::SBTarget
+    //CreateTarget (const char *filename,
+    //              const char *target_triple,
+    //              const char *platform_name,
+    //              bool add_dependent_modules,
+    //              lldb::SBError& error);
+    //?CreateTarget@SBDebugger@lldb@@QAE?AVSBTarget@2@PBD00_NAAVSBError@2@@Z
+    SBTarget CreateTarget (const char *filename,
+                      const char *target_triple,
+                      const char *platform_name,
+                      bool add_dependent_modules,
+                      ref SBError error) {
+        return SBTarget(SBDebugger_CreateTarget_long(_this, filename, target_triple, platform_name, add_dependent_modules, error));
+    }
+
+    //lldb::SBTarget
+    //    CreateTarget (const char *filename);
+    //?CreateTarget@SBDebugger@lldb@@QAE?AVSBTarget@2@PBD@Z
+    //SBTarget CreateTarget (const char *filename) {
+    //}
+
+
 
     //static lldb::SBDebugger
     //    Create(bool source_init_files);

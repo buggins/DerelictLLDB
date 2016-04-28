@@ -2,7 +2,10 @@ module derelict.lldb;
 
 public import derelict.lldb.types;
 public import derelict.lldb.functions;
+
 public import derelict.lldb.API.SBDebugger;
+public import derelict.lldb.API.SBError;
+public import derelict.lldb.API.SBTarget;
 
 private {
     import derelict.util.loader;
@@ -28,15 +31,14 @@ class DerelictLLDBLoader : SharedLibLoader {
             bindFunc( cast( void** )&SBDebugger_Create_bool, "?Create@SBDebugger@lldb@@SA?AV12@_N@Z" );
             bindFunc( cast( void** )&SBDebugger_Initialize, "?Initialize@SBDebugger@lldb@@SAXXZ" );
             bindFunc( cast( void** )&SBDebugger_Terminate, "?Terminate@SBDebugger@lldb@@SAXXZ" );
-              //bindFunc( cast( void** )&FcPatternCreate, "FcPatternCreate" );
-            //bindFunc( cast( void** )&FcPatternAddBool, "FcPatternAddBool" );
-            //bindFunc( cast( void** )&FcFontList, "FcFontList" );
-            //bindFunc( cast( void** )&FcPatternDestroy, "FcPatternDestroy" );
-            //bindFunc( cast( void** )&FcObjectSetDestroy, "FcObjectSetDestroy" );
-            //bindFunc( cast( void** )&FcPatternGetString, "FcPatternGetString" );
-            //bindFunc( cast( void** )&FcPatternGetInteger, "FcPatternGetInteger" );
-            //bindFunc( cast( void** )&FcPatternGetBool, "FcPatternGetBool" );
-            //bindFunc( cast( void** )&FcFontSetDestroy, "FcFontSetDestroy" );
+            bindFunc( cast( void** )&SBDebugger_CreateTarget_long, "?CreateTarget@SBDebugger@lldb@@QAE?AVSBTarget@2@PBD00_NAAVSBError@2@@Z" );
+
+            bindFunc( cast( void** )&SBError_ctr_SBError, "??0SBError@lldb@@QAE@ABV01@@Z" );
+            bindFunc( cast( void** )&SBError_ctr, "??0SBError@lldb@@QAE@XZ" );
+            bindFunc( cast( void** )&SBError_dtr, "??1SBError@lldb@@QAE@XZ" );
+            bindFunc( cast( void** )&SBError_Clear, "?Clear@SBError@lldb@@QAEXXZ" );
+            bindFunc( cast( void** )&SBError_Fail, "?Fail@SBError@lldb@@QBE_NXZ" );
+            bindFunc( cast( void** )&SBError_Success, "?Success@SBError@lldb@@QBE_NXZ" );
       }
 }
 
