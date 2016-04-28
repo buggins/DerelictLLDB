@@ -41,6 +41,8 @@ struct SBDebugger {
     //static lldb::SBDebugger
     //    Create(bool source_init_files);
     static SBDebugger Create(bool source_init_files) {
+        uint flg = source_init_files;
+        version (EMULATE_FASTCALL) asm { mov ECX, flg; }
         SBDebugger_impl impl = SBDebugger_Create_bool(source_init_files);
         return SBDebugger(impl);
     }
@@ -63,6 +65,7 @@ struct SBDebugger {
     //static void
     //    Destroy (lldb::SBDebugger &debugger);
     static void Destroy (ref SBDebugger debugger) {
+        version (EMULATE_FASTCALL) asm { mov ECX, debugger; }
         SBDebugger_Destroy(debugger);
     }
 }

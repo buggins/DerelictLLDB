@@ -13,7 +13,6 @@ module derelict.lldb.API.SBError;
 
 import derelict.lldb.API.SBDefines;
 
-//extern (C) 
 struct SBError {
     import derelict.lldb.functions;
 
@@ -28,32 +27,32 @@ struct SBError {
     this(ref const(SBError) rhs) {
         import dlangui.core.logger;
         Log.d("SBError.this(ref)");
+        version (EMULATE_FASTCALL) { asm { mov ECX, this; mov EDX, rhs; } }
         SBError_ctr_SBError(this, rhs);
     }
 
     ~this() {
         import dlangui.core.logger;
         Log.d("SBError.~this()");
+        version (EMULATE_FASTCALL) asm { mov ECX, this; }
         SBError_dtr(this);
     }
 
     void Clear () {
         import dlangui.core.logger;
         Log.d("SBError.clear()");
+        version (EMULATE_FASTCALL) asm { mov ECX, this; }
         SBError_Clear(this);
     }
 
     @property bool Fail () const {
-        import dlangui.core.logger;
-        Log.d("SBError.fail()");
+        version (EMULATE_FASTCALL) asm { mov ECX, this; } 
         return SBError_Fail(this);
     }
 
     @property bool Success () const {
-        import dlangui.core.logger;
-        Log.d("Inside Success");
-        bool res = SBError_Success(this);
-        return res;
+        version (EMULATE_FASTCALL) asm { mov ECX, this; }
+        return SBError_Success(this);
     }
 
 private:

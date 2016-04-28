@@ -12,28 +12,36 @@ void runLldbTests() {
         return;
     }
     SBDebugger.Initialize();
-    scope(exit) SBDebugger.Terminate();
     SBError err = SBError(false);
-    Log.i("Creating SBDebugger");
-    SBDebugger debugger = SBDebugger.Create(true);
-    if (debugger.isNull) {
-        Log.e("Debugger initialization failed");
-        return;
-    }
-    scope(exit) SBDebugger.Destroy(debugger);
-
-    Log.i("SBDebugger created ok");
-    SBTarget target = debugger.CreateTarget("dmledit.exe",
-                                            null, //arch,
-                                            null, //platform,
-                                            false, //add_dependent_libs,
-                                            err);
-    if (err.Success) {
-        Log.d("Target created successfully");
-        if (target.IsValid) {
-            Log.d("Target is valid");
-            string m = "";
+    {
+        Log.i("Creating SBDebugger");
+        SBDebugger debugger = SBDebugger.Create(true);
+        if (debugger.isNull) {
+            Log.e("Debugger initialization failed");
+            return;
         }
+
+        Log.i("SBDebugger created ok");
+        SBTarget target = debugger.CreateTarget("dmledit.exe",
+                                                null, //arch,
+                                                null, //platform,
+                                                false, //add_dependent_libs,
+                                                err);
+        Log.i("returned from CreateTarget");
+        if (err.Success) {
+            Log.d("Target created successfully");
+            if (target.IsValid) {
+                Log.d("Target is valid");
+                string m = "";
+            } else {
+                Log.d("Target is not valid");
+            }
+        }
+        Log.d("Destroying debugger");
+        SBDebugger.Destroy(debugger);
+        Log.d("Debugger destroyed");
     }
-    Log.d("...");
+    Log.d("Terminating lldb");
+    SBDebugger.Terminate();
+    Log.d("Done");
 }
