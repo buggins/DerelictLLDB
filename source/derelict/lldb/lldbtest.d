@@ -16,10 +16,18 @@ void runLldbTests() {
     {
         Log.i("Creating SBDebugger");
         SBDebugger debugger = SBDebugger.Create(true);
-        if (debugger.isNull) {
-            Log.e("Debugger initialization failed");
-            return;
-        }
+        //if (debugger.isNull) {
+        //    Log.e("Debugger initialization failed");
+        //    return;
+        //}
+
+        /*
+        Log.d("SBDebugger.GetAsync: ", debugger.GetAsync);
+        debugger.SetAsync(true);
+        Log.d("SBDebugger.GetAsync after setting to true", debugger.GetAsync);
+        debugger.SetAsync(false);
+        Log.d("SBDebugger.GetAsync after setting to false", debugger.GetAsync);
+        */
 
         Log.i("SBDebugger created ok");
         SBTarget target = debugger.CreateTarget("dmledit.exe",

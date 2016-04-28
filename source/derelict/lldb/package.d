@@ -33,6 +33,11 @@ class DerelictLLDBLoader : SharedLibLoader {
             bindFunc( cast( void** )&SBDebugger_Initialize, "?Initialize@SBDebugger@lldb@@SAXXZ" );
             bindFunc( cast( void** )&SBDebugger_Terminate, "?Terminate@SBDebugger@lldb@@SAXXZ" );
             bindFunc( cast( void** )&SBDebugger_CreateTarget_long, "?CreateTarget@SBDebugger@lldb@@QAE?AVSBTarget@2@PBD00_NAAVSBError@2@@Z" );
+            bindFunc( cast( void** )&SBDebugger_Clear, "?Clear@SBDebugger@lldb@@QAEXXZ" );
+            bindFunc( cast( void** )&SBDebugger_SetAsync, "?SetAsync@SBDebugger@lldb@@QAEX_N@Z" );
+            bindFunc( cast( void** )&SBDebugger_GetAsync, "?GetAsync@SBDebugger@lldb@@QAE_NXZ" );
+            bindFunc( cast( void** )&SBDebugger_SkipLLDBInitFiles, "?SkipLLDBInitFiles@SBDebugger@lldb@@QAEX_N@Z" );
+            bindFunc( cast( void** )&SBDebugger_SkipAppInitFiles, "?SkipAppInitFiles@SBDebugger@lldb@@QAEX_N@Z" );
 
             bindFunc( cast( void** )&SBError_ctr_SBError, "??0SBError@lldb@@QAE@ABV01@@Z" );
             bindFunc( cast( void** )&SBError_ctr, "??0SBError@lldb@@QAE@XZ" );
