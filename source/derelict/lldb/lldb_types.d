@@ -100,3 +100,13 @@ alias break_id_t = int;
 alias watch_id_t = int;
 alias opaque_compiler_type_t = void *;
 alias queue_id_t = ulong;
+
+
+alias int8_t = byte;
+alias uint8_t = ubyte;
+alias int16_t = short;
+alias uint16_t = ushort;
+alias int32_t = int;
+alias uint32_t = uint;
+alias int64_t = long;
+alias uint64_t = ulong;
