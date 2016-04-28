@@ -10,6 +10,10 @@ struct SBTarget {
         return _this is null;
     }
 
+    @property bool IsValid() const {
+        return SBTarget_IsValid(this);
+    }
+
 private:
     //lldb::DebuggerSP m_opaque_sp;
     SBTarget_impl _this;

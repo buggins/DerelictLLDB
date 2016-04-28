@@ -13,27 +13,47 @@ module derelict.lldb.API.SBError;
 
 import derelict.lldb.API.SBDefines;
 
+//extern (C) 
 struct SBError {
     import derelict.lldb.functions;
 
-    this(ref SBError rhs) {
+    @disable private this();
+
+    this(bool dummy) {
+        import dlangui.core.logger;
+        Log.d("SBError.this()");
+        SBError_ctr(this);
+    }
+
+    this(ref const(SBError) rhs) {
+        import dlangui.core.logger;
+        Log.d("SBError.this(ref)");
         SBError_ctr_SBError(this, rhs);
     }
 
     ~this() {
+        import dlangui.core.logger;
+        Log.d("SBError.~this()");
         SBError_dtr(this);
     }
 
     void Clear () {
+        import dlangui.core.logger;
+        Log.d("SBError.clear()");
         SBError_Clear(this);
     }
 
-    bool Fail () const {
+    @property bool Fail () const {
+        import dlangui.core.logger;
+        Log.d("SBError.fail()");
         return SBError_Fail(this);
     }
 
-    bool Success () const {
-        return SBError_Success(this);
+    @property bool Success () const {
+        import dlangui.core.logger;
+        Log.d("Inside Success");
+        bool res = SBError_Success(this);
+        return res;
     }
 
 private:

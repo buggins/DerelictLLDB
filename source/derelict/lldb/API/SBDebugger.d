@@ -27,7 +27,7 @@ struct SBDebugger {
                       const char *platform_name,
                       bool add_dependent_modules,
                       ref SBError error) {
-        return SBTarget(SBDebugger_CreateTarget_long(_this, filename, target_triple, platform_name, add_dependent_modules, error));
+        return SBDebugger_CreateTarget_long(_this, filename, target_triple, platform_name, add_dependent_modules, error);
     }
 
     //lldb::SBTarget
@@ -62,5 +62,7 @@ struct SBDebugger {
 
     //static void
     //    Destroy (lldb::SBDebugger &debugger);
-
+    static void Destroy (ref SBDebugger debugger) {
+        SBDebugger_Destroy(debugger);
+    }
 }

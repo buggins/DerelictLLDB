@@ -29,6 +29,7 @@ class DerelictLLDBLoader : SharedLibLoader {
 
       protected override void loadSymbols() {
             bindFunc( cast( void** )&SBDebugger_Create_bool, "?Create@SBDebugger@lldb@@SA?AV12@_N@Z" );
+            bindFunc( cast( void** )&SBDebugger_Destroy, "?Destroy@SBDebugger@lldb@@SAXAAV12@@Z" );
             bindFunc( cast( void** )&SBDebugger_Initialize, "?Initialize@SBDebugger@lldb@@SAXXZ" );
             bindFunc( cast( void** )&SBDebugger_Terminate, "?Terminate@SBDebugger@lldb@@SAXXZ" );
             bindFunc( cast( void** )&SBDebugger_CreateTarget_long, "?CreateTarget@SBDebugger@lldb@@QAE?AVSBTarget@2@PBD00_NAAVSBError@2@@Z" );
@@ -39,6 +40,8 @@ class DerelictLLDBLoader : SharedLibLoader {
             bindFunc( cast( void** )&SBError_Clear, "?Clear@SBError@lldb@@QAEXXZ" );
             bindFunc( cast( void** )&SBError_Fail, "?Fail@SBError@lldb@@QBE_NXZ" );
             bindFunc( cast( void** )&SBError_Success, "?Success@SBError@lldb@@QBE_NXZ" );
+
+            bindFunc( cast( void** )&SBTarget_IsValid, "?IsValid@SBTarget@lldb@@QBE_NXZ" );
       }
 }
 
