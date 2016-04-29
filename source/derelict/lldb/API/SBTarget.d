@@ -18,6 +18,6 @@ struct SBTarget {
 
 private:
     //lldb::DebuggerSP m_opaque_sp;
-    void * m_opaque_sp;
+    private OpaqueSP m_opaque_sp;
     //SBTarget_impl _this;
 }

@@ -1,11 +1,12 @@
 module derelict.lldb.API.SBDebugger;
 
+import derelict.lldb.lldb_types;
 import derelict.lldb.API.SBTarget;
 import derelict.lldb.API.SBError;
 
 struct SBDebugger {
     import derelict.lldb.functions;
-    private void * m_opaque_sp;
+    private OpaqueSP m_opaque_sp;
 
     //private this(SBDebugger_impl impl) {
     //    _this = impl;
@@ -132,13 +133,6 @@ struct SBDebugger {
 //                            const lldb::SBEvent &event,
 //                            FILE *out,
 //                            FILE *err);
-//
-//lldb::SBTarget
-//        CreateTarget (const char *filename,
-//                      const char *target_triple,
-//                      const char *platform_name,
-//                      bool add_dependent_modules,
-//                      lldb::SBError& error);
 //
 //lldb::SBTarget
 //        CreateTargetWithFileAndTargetTriple (const char *filename,

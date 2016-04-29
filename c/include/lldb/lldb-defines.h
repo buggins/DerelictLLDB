@@ -14,9 +14,9 @@
 
 #if defined (_MSC_VER)
     #if defined(EXPORT_LIBLLDB)
-        #define  LLDB_API __declspec(dllexport)
+        #define  LLDB_API __declspec(dllexport) __stdcall
     #elif defined(IMPORT_LIBLLDB)
-        #define  LLDB_API __declspec(dllimport)
+        #define  LLDB_API __declspec(dllimport) __stdcall
     #else
         #define LLDB_API
     #endif

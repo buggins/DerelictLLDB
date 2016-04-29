@@ -110,3 +110,8 @@ alias int32_t = int;
 alias uint32_t = uint;
 alias int64_t = long;
 alias uint64_t = ulong;
+
+struct OpaqueSP {
+    void * ptr1;
+    void * ptr2;
+}
